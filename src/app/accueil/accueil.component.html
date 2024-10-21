@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteAuto - Location de Voitures Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+    
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">EliteAuto</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a [routerLink]="['/offres']">Nos Voitures</a></li>
+
+
+                <li><a href="#caracteristiques">Caractéristiques</a></li>
+                <li><a href="#temoignages">Témoignages</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="accueil" class="hero">
+        <div class="hero-content">
+            <h1>EliteAuto - Location de Voitures Premium</h1>
+            <p>Découvrez le luxe et le confort de notre flotte de véhicules haut de gamme</p>
+            <a href="#voitures" class="btn">Voir nos voitures</a>
+        </div>
+    </section>
+
+    <section id="voitures" class="cars">
+        <div class="container">
+            <h2 class="section-title">Nos Voitures de Luxe</h2>
+            <div class="car-grid">
+                <div class="car-card">
+                    <img src="https://uxwxqpvvxhgxqnbdqbxm.supabase.co/storage/v1/object/public/images/car-luxury1.jpg" alt="Mercedes-Benz S-Class">
+                    <div class="car-info">
+                        <h3>Mercedes-Benz S-Class</h3>
+                        <p>Berline de luxe, confort exceptionnel</p>
+                        <p class="price">À partir de 250€/jour</p>
+                        <a href="#" class="btn">Réserver</a>
+                    </div>
+                </div>
+                <div class="car-card">
+                    <img src="https://uxwxqpvvxhgxqnbdqbxm.supabase.co/storage/v1/object/public/images/car-luxury2.jpg" alt="BMW X7">
+                    <div class="car-info">
+                        <h3>BMW X7</h3>
+                        <p>SUV spacieux et élégant</p>
+                        <p class="price">À partir de 300€/jour</p>
+                        <a href="#" class="btn">Réserver</a>
+                    </div>
+                </div>
+                <div class="car-card">
+                    <img src="https://uxwxqpvvxhgxqnbdqbxm.supabase.co/storage/v1/object/public/images/car-luxury3.jpg" alt="Audi A8">
+                    <div class="car-info">
+                        <h3>Audi A8</h3>
+                        <p>Technologie de pointe et design raffiné</p>
+                        <p class="price">À partir de 280€/jour</p>
+                        <a href="#" class="btn">Réserver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="caracteristiques" class="features">
+        <div class="container">
+            <h2 class="section-title">Pourquoi Choisir EliteAuto</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <i class="fas fa-car-side"></i>
+                    <h3>Véhicules Premium</h3>
+                    <p>Une flotte de voitures haut de gamme régulièrement entretenues et mises à jour.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-clock"></i>
+                    <h3>Service 24/7</h3>
+                    <p>Assistance clientèle disponible à tout moment pour répondre à vos besoins.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Livraison Flexible</h3>
+                    <p>Options de prise en charge et de retour adaptées à votre emploi du temps.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Assurance Complète</h3>
+                    <p>Tranquillité d'esprit avec notre couverture d'assurance étendue.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="temoignages" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Ce que disent nos clients</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <img src="https://uxwxqpvvxhgxqnbdqbxm.supabase.co/storage/v1/object/public/images/testimonial1.jpg" alt="Client 1">
+                    <p>"Un service exceptionnel et des voitures impeccables. Je recommande vivement EliteAuto pour toute location de voiture de luxe."</p>
+                    <p class="name">Sophie D.</p>
+                </div>
+                <div class="testimonial">
+                    <img  src="https://uxwxqpvvxhgxqnbdqbxm.supabase.co/storage/v1/object/public/images/testimonial2.jpg" alt="Client 2">
+                    <p>"La meilleure expérience de location que j'ai jamais eue. Le personnel est professionnel et les véhicules sont de première classe."</p>
+                    <p class="name">Thomas M.</p>
+                </div>
+                <div class="testimonial">
+                    <img src="https://uxwxqpvvxhgxqnbdqbxm.supabase.co/storage/v1/object/public/images/testimonial3.jpg" alt="Client 3">
+                    <p>"EliteAuto a rendu mon voyage d'affaires beaucoup plus agréable. Je n'hésiterai pas à faire appel à leurs services à nouveau."</p>
+                    <p class="name">Emma L.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>À propos d'EliteAuto</h3>
+                    <p>EliteAuto est votre partenaire de confiance pour la location de voitures de luxe. Nous nous engageons à fournir une expérience de conduite exceptionnelle.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#voitures">Nos Voitures</a></li>
+                        <li><a href="#caracteristiques">Caractéristiques</a></li>
+                        <li><a href="#temoignages">Témoignages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: info@eliteauto.com</p>
+                    <p>Téléphone: ******</p>
+                    <p>Adresse:*******</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 EliteAuto - Location de Voitures Premium. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

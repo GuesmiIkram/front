@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteAuto - Publier une annonce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">EliteAuto</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#voitures">Nos Voitures</a></li>
+                <li><a href="#caracteristiques">Caractéristiques</a></li>
+                <li><a href="#temoignages">Témoignages</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <form (ngSubmit)="onSubmit()">
+        <div class="container">
+            <div class="form-container">
+                <h2>Publier une annonce de voiture</h2>
+
+                <div>
+                    <label for="marque">Marque</label>
+                    <input type="text" id="marque" [(ngModel)]="voiture.marque" name="marque" required>
+                </div>
+
+                <div>
+                    <label for="modele">Modèle</label>
+                    <input type="text" id="modele" [(ngModel)]="voiture.modele" name="modele" required>
+                </div>
+
+                <div>
+                    <label for="annee">Année</label>
+                    <input type="number" id="annee" [(ngModel)]="voiture.annee" name="annee" required>
+                </div>
+
+                <div>
+                    <label for="prix">Prix</label>
+                    <input type="number" id="prix" [(ngModel)]="voiture.prix" name="prix" required>
+                </div>
+
+                <div>
+                    <label for="couleur">Couleur</label>
+                    <input type="text" id="couleur" [(ngModel)]="voiture.couleur" name="couleur" required>
+                </div>
+
+                <!-- Boîte de vitesse -->
+                <div>
+                    <label for="boiteVitesse">Boîte de vitesse</label>
+                    <select id="boiteVitesse" [(ngModel)]="voiture.boiteVitesse" name="boiteVitesse" required>
+                        <option value="Manuelle">Manuelle</option>
+                        <option value="Automatique">Automatique</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="description">Description</label>
+                    <textarea id="description" [(ngModel)]="voiture.description" name="description" required></textarea>
+                </div>
+
+                <div>
+                    <label for="etat">État</label>
+                    <input type="text" id="etat" [(ngModel)]="voiture.etat" name="etat" required>
+                </div>
+
+                <!-- Nombre de portes -->
+                <div>
+                    <label for="nombrePortes">Nombre de portes</label>
+                    <select id="nombrePortes" [(ngModel)]="voiture.nombrePortes" name="nombrePortes" required>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="airConditionne">Air conditionné</label>
+                    <input type="checkbox" id="airConditionne" [(ngModel)]="voiture.airConditionne" name="airConditionne">
+                </div>
+
+                <div>
+                    <label for="typeCarburant">Type de carburant</label>
+                    <input type="text" id="typeCarburant" [(ngModel)]="voiture.typeCarburant" name="typeCarburant" required>
+                </div>
+
+                <!-- Nombre de chevaux -->
+                <div>
+                    <label for="nombreChevaux">Nombre de chevaux</label>
+                    <select id="nombreChevaux" [(ngModel)]="voiture.nombreChevaux" name="nombreChevaux" required>
+                        <option value="70">70</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                        <option value="300">300</option>
+                    </select>
+                </div>
+
+                <!-- Nombre de passagers -->
+                <div>
+                    <label for="nombrePassagers">Nombre de passagers</label>
+                    <select id="nombrePassagers" [(ngModel)]="voiture.nombrePassagers" name="nombrePassagers" required>
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="7">7</option>
+                    </select>
+                </div>
+                <div><label for="dateDebut">Date de début :</label>
+                  <input type="date" id="dateDebut" [(ngModel)]="voiture.dateDebutDisponibilite" name="dateDebut">
+                  
+                  <label for="dateFin">Date de fin :</label>
+                  <input type="date" id="dateFin" [(ngModel)]="voiture.dateFinDisponibilite" name="dateFin">
+                  </div>
+                <div>
+                    <label for="montantCaution">Montant de la caution</label>
+                    <input type="number" id="montantCaution" [(ngModel)]="voiture.montantCaution" name="montantCaution" required>
+                </div>
+
+                <div>
+                    <label for="image">Image</label>
+                    <input type="file" id="image" (change)="onImageChange($event)" accept="image/*">
+                </div>
+
+                <button type="submit">Publier</button>
+            </div>
+        </div>
+    </form>
+    <p>{{ message }}</p>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>À propos d'EliteAuto</h3>
+                    <p>EliteAuto est votre partenaire de confiance pour la location de voitures de luxe. Nous nous engageons à fournir une expérience de conduite exceptionnelle.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#voitures">Nos Voitures</a></li>
+                        <li><a href="#caracteristiques">Caractéristiques</a></li>
+                        <li><a href="#temoignages">Témoignages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: info@eliteauto.com</p>
+                    <p>Téléphone: +33 1 23 45 67 89</p>
+                    <p>Adresse: 123 Avenue du Luxe, 75008 Paris</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 EliteAuto - Location de Voitures Premium. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
