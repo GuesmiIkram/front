@@ -15,23 +15,24 @@ export class LoginComponent {
     constructor(private http: HttpClient, private router: Router) {}
 
     login() {
-      const loginData = {
-          telephone: this.telephone,
-          password: this.password
-      };
-  
-      this.http.post('http://localhost:8081/api/proprietaires/login', loginData).subscribe(
-          response => {
-              console.log('Login successful:', response);
-              this.router.navigate(['/accueil']);
-              // Gérer la redirection ou afficher le message de succès
-          },
-          error => {
-              console.error('Login failed:', error);
-              // Afficher le message d'erreur
-          }
-      );
-  }
+        const loginData = {
+            telephone: this.telephone,
+            password: this.password
+        };
+    
+        this.http.post('http://localhost:8081/api/proprietaires/login', loginData).subscribe(
+            (response: any) => {  // Assume que la réponse contient l'ID de l'utilisateur
+                console.log('Login successful:', response);
+                localStorage.setItem('userId', response.proprietaireId);  // Sauvegarder l'ID
+                this.router.navigate(['/publier-annonce']);
+            },
+            error => {
+                console.error('Login failed:', error);
+                this.errorMessage = 'Échec de la connexion.';
+            }
+        );
+    }
+    
 }
 
 

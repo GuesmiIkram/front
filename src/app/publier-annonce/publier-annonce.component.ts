@@ -45,6 +45,13 @@ export class PublierAnnonceComponent {
       this.message = "Tous les champs doivent être remplis.";
       return;
     }
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+        this.message = "Utilisateur non connecté.";
+        return;
+    }
+
+    this.voiture.proprietaireId = Number(userId);
 
     if (this.validateDates()) {
       console.log('Données de la voiture :', this.voiture);
