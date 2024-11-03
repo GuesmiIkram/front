@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteAuto - Publier une annonce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">EliteAuto</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#voitures">Nos Voitures</a></li>
+                <li><a href="#caracteristiques">Caractéristiques</a></li>
+                <li><a href="#temoignages">Témoignages</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <form (ngSubmit)="onSubmit()">
+        <div class="container">
+            <div class="form-container">
+                <h2>Publier une annonce </h2>
+            </div>
+            <div>
+                <label for="annonce">Annonce</label>
+                <textarea id="annonce" [(ngModel)]="pub.contenu" name="description" required></textarea>
+            </div>
+            <div *ngIf="warningMessage" class="warning-message">{{ warningMessage }}</div>
+            <button type="submit">Publier</button>
+        </div>
+    </form>
+    
+<p>{{ message }}</p>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos d'EliteAuto</h3>
+                <p>EliteAuto est votre partenaire de confiance pour la location de voitures de luxe. Nous nous engageons à fournir une expérience de conduite exceptionnelle.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#voitures">Nos Voitures</a></li>
+                    <li><a href="#caracteristiques">Caractéristiques</a></li>
+                    <li><a href="#temoignages">Témoignages</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@eliteauto.com</p>
+                <p>Téléphone: +33 1 23 45 67 89</p>
+                <p>Adresse: 123 Avenue du Luxe, 75008 Paris</p>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 EliteAuto - Location de Voitures Premium. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

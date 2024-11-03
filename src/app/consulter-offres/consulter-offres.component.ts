@@ -15,6 +15,9 @@ export class ConsulterOffresComponent implements OnInit {
   filterDateDebut: string; // Declare filterDateDebut
   filterDateFin: string;   
 
+
+  
+
   constructor(private voitureService: VoitureService) { this.filterDateDebut = '';
     this.filterDateFin = '';}
 

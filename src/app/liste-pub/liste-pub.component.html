@@ -1,0 +1,16 @@
+<div class="publications-container">
+    <!-- Message d'erreur si une erreur survient -->
+    <div *ngIf="message" class="error-message">
+        {{ message }}
+    </div>
+
+    <!-- Boucle sur la liste des publications et les affiche -->
+    <div *ngFor="let publication of pub" class="publication-item">
+        <div class="publication-content">
+            <!-- Affiche le contenu de la publication -->
+            <p>{{ publication.contenu }}</p>
+        </div>
+    </div>
+</div>
+
+

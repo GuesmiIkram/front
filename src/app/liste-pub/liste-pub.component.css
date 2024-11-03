@@ -1,0 +1,75 @@
+.publications-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .error-message {
+    background-color: #FFE5E5;
+    color: #FF0000;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+
+  
+  .publication-item {
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .publication-item:hover {
+    transform: translateY(-3px);
+  }
+  
+  .publication-content {
+    color: #333333;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .publication-content p {
+    margin: 0;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .publications-container {
+      margin: 20px;
+      padding: 15px;
+    }
+  
+    .publication-item {
+      padding: 12px;
+    }
+  
+    .publication-content {
+      font-size: 14px;
+    }
+  }
+  
+  /* Optional: Add a title for the publications section */
+  .publications-title {
+    color: #003366;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Optional: Style for when there are no publications */
+  .no-publications {
+    text-align: center;
+    color: #666666;
+    font-style: italic;
+    margin-top: 20px;
+  }

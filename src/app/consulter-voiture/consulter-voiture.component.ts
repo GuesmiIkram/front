@@ -17,6 +17,8 @@ export class ConsulterVoitureComponent implements OnInit {
     private voitureService: VoitureService
   ) {}
 
+
+  
   ngOnInit(): void {
     this.getVoitureDetails();
   }

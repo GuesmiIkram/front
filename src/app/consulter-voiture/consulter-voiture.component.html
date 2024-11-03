@@ -1,69 +1,87 @@
-<div class="container" style="padding-top: 80px; padding-bottom: 40px;">
-    <div *ngIf="voiture" class="car-details" style="background-color: #FFFFFF; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); overflow: hidden; padding: 2rem;">
-      <h2 style="color: #003366; font-size: 2.5rem; margin-bottom: 1.5rem; text-align: center;">Détails de la Voiture</h2>
-      
-      <img [src]="'http://localhost:8081/images/' + voiture.imagePath" 
-           [alt]="voiture.marque + ' ' + voiture.modele" 
-           style="width: 100%; height: 400px; object-fit: cover; border-radius: 10px; margin-bottom: 2rem;">
-      
-      <h3 style="color: #003366; font-size: 2rem; margin-bottom: 1rem;">{{ voiture.marque }} {{ voiture.modele }}</h3>
-      
-      <div class="car-info-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Matricule :</span> {{ voiture.matricule }}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteAuto - Location de Voitures Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">EliteAuto</div>
+            <ul class="nav-links">
+                <li><a [routerLink]="['/accueil']">Accueil</a></li>
+                <li><a [routerLink]="['/offres']">Nos Voitures</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container car-details-section">
+        <div *ngIf="voiture" class="car-details">
+          <a [routerLink]="['/offres']"> Retour</a>
+            <img [src]="'http://localhost:8081/images/' + voiture.imagePath" 
+                 [alt]="voiture.marque + ' ' + voiture.modele" 
+                 class="car-image">
+            <div class="car-info">
+                <h1>Voiture : {{ voiture.marque }} {{ voiture.modele }}</h1>
+                <div class="car-pricing">
+                    <div class="price">{{ voiture.prixParJour }} €/jour</div>
+                    <button class="btn-reserver">Réserver</button>
+                </div>
+                <div class="car-features">
+                    <div><i class="fas fa-car"></i><p>{{ voiture.nombrePortes }} portes</p></div>
+                    <div><i class="fas fa-snowflake"></i><p>Climatisation : {{ voiture.airConditionne }}</p></div>
+                    <div><i class="fas fa-cogs"></i><p>Boîte : {{ voiture.boiteVitesse }}</p></div>
+                    <div><i class="fas fa-gas-pump"></i><p>Carburant : {{ voiture.typeCarburant }}</p></div>
+                    <div><i class="fas fa-palette"></i><p>Couleur : {{ voiture.couleur }}</p></div>
+                    <div><i class="fas fa-euro-sign"></i><p>Caution : {{ voiture.montantCaution }} €</p></div>
+                    <div><i class="fas fa-info-circle"></i><p>Description : {{ voiture.description }}</p></div>
+                </div>
+                <div class="availability">
+                    <h2>Disponible du {{ voiture.dateDebutDisponibilite | date:'dd/MM/yyyy' }} au {{ voiture.dateFinDisponibilite | date:'dd/MM/yyyy' }}</h2>
+                </div>
+            </div>
+            <p *ngIf="message" class="message">{{ message }}</p>
         </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Année :</span> {{ voiture.annee }}
-        </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Couleur :</span> {{ voiture.couleur }}
-        </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Prix :</span> {{ voiture.prix }} TND
-        </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">État :</span> {{ voiture.etat }}
-        </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Nombre de Portes :</span> {{ voiture.nombrePortes }}
-        </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Air Conditionné :</span> {{ voiture.airConditionne ? 'Oui' : 'Non' }}
-        </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Type de Carburant :</span> {{ voiture.typeCarburant }}
-        </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Boîte de Vitesse :</span> {{ voiture.boiteVitesse }}
-        </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Nombre de Chevaux :</span> {{ voiture.nombreChevaux }}
-        </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Nombre de Passagers :</span> {{ voiture.nombrePassagers }}
-        </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Prix par Jour :</span> {{ voiture.prixParJour }} TND
-        </div>
-        <div class="info-item" style="background-color: #F5F5F5; padding: 1rem; border-radius: 5px;">
-          <span style="font-weight: bold; color: #003366;">Montant de Caution :</span> {{ voiture.montantCaution }} TND
-        </div>
-      </div>
-      
-      <div class="description" style="background-color: #F5F5F5; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
-        <h4 style="color: #003366; margin-bottom: 0.5rem;">Description :</h4>
-        <p>{{ voiture.description }}</p>
-      </div>
-      
-      <div class="availability" style="background-color: #003366; color: #FFFFFF; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem;">
-        <h4 style="color: #FFD700; margin-bottom: 0.5rem;">Disponibilité :</h4>
-        <p>Du {{ voiture.dateDebutDisponibilite | date }} au {{ voiture.dateFinDisponibilite | date }}</p>
-      </div>
-      
-      <div style="text-align: center;">
-        <a href="#" class="btn" style="display: inline-block; background-color: #FFD700; color: #003366; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 5px; transition: all 0.3s ease; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">Réserver maintenant</a>
-      </div>
     </div>
-    
-    <p *ngIf="message" style="text-align: center; font-size: 1.2rem; margin-top: 2rem; padding: 1rem; background-color: #FFD700; color: #003366; border-radius: 5px;">{{ message }}</p>
-  </div>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>À propos d'EliteAuto</h3>
+                    <p>EliteAuto est votre partenaire de confiance pour la location de voitures de luxe. Nous nous engageons à fournir une expérience de conduite exceptionnelle.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul>
+                      <li><a [routerLink]="['/accueil']">Accueil</a></li>
+                      <li><a [routerLink]="['/offres']">Nos Voitures</a></li>
+                      <li><a href="#contact">Contact</a></li>
+                    
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: info@eliteauto.com</p>
+                    <p>Téléphone: ******</p>
+                    <p>Adresse:*******</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 EliteAuto - Location de Voitures Premium. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

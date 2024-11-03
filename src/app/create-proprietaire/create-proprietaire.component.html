@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Inscription Propriétaire</h2>
+  <form (ngSubmit)="onSubmit()" #proprietaireForm="ngForm">
+    <label for="nom">Nom:</label>
+    <input type="text" id="nom" [(ngModel)]="proprietaire.nom" name="nom" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" [(ngModel)]="proprietaire.email" name="email" required>
+    
+    <label for="telephone">Téléphone:</label>
+    <input type="tel" id="telephone" [(ngModel)]="proprietaire.telephone" name="telephone" required>
+    
+    <label for="password">Mot de passe:</label>
+    <input type="password" id="password" [(ngModel)]="proprietaire.password" name="password" required>
+    
+    <div *ngIf="warningMessage" class="warning-message">{{ warningMessage }}</div>
+    
+    <button type="submit">S'inscrire</button>
+  </form>
+</div>
+

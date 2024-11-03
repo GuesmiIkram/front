@@ -24,3 +24,5 @@ export class Voiture {
     
     // Assuming you want to link to the Proprietaire entity, replace with appropriate type if needed
 }
+
+

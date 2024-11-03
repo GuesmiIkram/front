@@ -1,22 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccueilComponent } from './accueil.component';
+import { ListePubComponent } from './liste-pub.component';
 
-describe('AccueilComponent', () => {
-  let component: AccueilComponent;
-  let fixture: ComponentFixture<AccueilComponent>;
+describe('ListePubComponent', () => {
+  let component: ListePubComponent;
+  let fixture: ComponentFixture<ListePubComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AccueilComponent]
+      declarations: [ListePubComponent]
     });
-    fixture = TestBed.createComponent(AccueilComponent);
+    fixture = TestBed.createComponent(ListePubComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
+

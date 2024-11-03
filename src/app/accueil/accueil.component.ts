@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./accueil.component.css']
 })
 export class AccueilComponent {
+  modalVisible: boolean = false;
 
-}
+  openModal() {
+    this.modalVisible = true;
+  }
+  
+  
+  closeModal() {
+    this.modalVisible = false;
+  }
+  }
+  
+
+

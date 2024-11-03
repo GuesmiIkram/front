@@ -11,7 +11,9 @@ describe('ConsulterVoitureComponent', () => {
       declarations: [ConsulterVoitureComponent]
     });
     fixture = TestBed.createComponent(ConsulterVoitureComponent);
-    component = fixture.componentInstance;
+    component = fixture.componentInstance;    
+
+    
     fixture.detectChanges();
   });
 
