@@ -25,7 +25,7 @@ export class ConsulterOffresComponent implements OnInit {
     this.getVoitures();
   }
 
-  // Méthode pour récupérer les voitures
+  
   getVoitures(): void {
     this.voitureService.getVoitures().subscribe({
       next: (data) => {
@@ -52,4 +52,5 @@ export class ConsulterOffresComponent implements OnInit {
       );
     });
   }
+  
 }

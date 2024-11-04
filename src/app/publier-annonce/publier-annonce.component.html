@@ -39,12 +39,7 @@
                 <p *ngIf="!voiture.couleur && voitureForm.submitted" style="color: red;">Ce champ est requis.</p>
             </div>
 
-            <!-- Champ État -->
-            <div>
-                <label for="etat">État</label>
-                <input type="text" id="etat" [(ngModel)]="voiture.etat" name="etat" required>
-                <p *ngIf="!voiture.etat && voitureForm.submitted" style="color: red;">Ce champ est requis.</p>
-            </div>
+          
 
             <!-- Champ Type de Carburant -->
             <div>

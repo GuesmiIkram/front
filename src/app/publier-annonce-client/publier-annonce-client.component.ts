@@ -16,32 +16,34 @@ export class PublierAnnonceClientComponent {
     constructor(private pubService: pubService, private router: Router) {} // Inject Router
 
     onSubmit(): void {
-        // Check if the content is empty
         if (!this.pub.contenu || this.pub.contenu.trim() === '') {
             this.warningMessage = 'Veuillez saisir une annonce avant de publier.';
-            return; // Prevent form submission
+            return;
         }
-
-        
+    
         this.warningMessage = ''; // Clear warning message
-        console.log('Données de la publication:', this.pub);
-        
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            this.message = "Utilisateur non connecté.";
+            return;
+        }
+    
+        this.pub.idClient = Number(userId); // Assurez-vous que c'est un nombre valide
+        console.log('ID du client:', this.pub.idClient); // Log l'ID du client
+        console.log('Données de la publication avant envoi:', this.pub);
         this.pubService.createpub(this.pub).subscribe({
             next: (response) => {
+                console.log('Réponse de l\'API:', response); // Log la réponse
                 this.message = 'Publication effectuée avec succès !';
-                console.log(response);
-
-                // Show alert message
                 alert(this.message);
-
-                // Redirect to homepage after the alert is dismissed
-                this.router.navigate(['/accueil']); // Update the path according to your routing setup
+                this.router.navigate(['/accueil']);
             },
             error: (err) => {
+                console.error('Erreur lors de la publication:', err); // Log l'erreur
                 this.message = 'Une erreur est survenue lors de la publication.';
-                console.error(err);
-                alert(this.message); // Show alert for error message
+                alert(this.message);
             }
         });
     }
+    
 }

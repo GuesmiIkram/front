@@ -1,0 +1,8 @@
+<div class="login-client">
+  <h2>Login with Facebook</h2>
+  <button (click)="signInWithFB()" [disabled]="isLoading">Login with Facebook</button>
+  <button (click)="signOut()">Logout</button>
+
+  <div *ngIf="isLoading">Logging in...</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>

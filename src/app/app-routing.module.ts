@@ -8,6 +8,7 @@ import { CreateProprietaireComponent } from './create-proprietaire/create-propri
 import { PublierAnnonceClientComponent } from './publier-annonce-client/publier-annonce-client.component';
 import { ListePubComponent } from './liste-pub/liste-pub.component';
 import { LoginComponent } from './login/login.component';
+import { LoginClientComponent } from './login-client/login-client.component';
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'publier-annonce-client', component: PublierAnnonceClientComponent },
   { path: 'liste-pub', component: ListePubComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'loginC', component: LoginClientComponent },
 
 
 ];

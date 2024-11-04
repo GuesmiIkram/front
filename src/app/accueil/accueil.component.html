@@ -19,6 +19,7 @@
                 <li><a [routerLink]="['/accueil']">Accueil</a></li>
                 <li><a [routerLink]="['/offres']">Nos Voitures</a></li>
                 <li><a (click)="openModal() ">Publier une annonce</a></li>
+                <li><a (click)="signOut()">signOut</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -30,7 +31,7 @@
           <p>Choisissez votre type de connexion :</p>
           <div class="login-options">
               <a [routerLink]="['/login']" class="btn">Connexion Propriétaire</a>
-              <a [routerLink]="['/login']" class="btn">Connexion Client</a>
+              <a [routerLink]="['/loginC']" class="btn">Connexion Client</a>
           </div>
         </div>
       </div>

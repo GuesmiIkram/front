@@ -37,7 +37,7 @@ export class PublierAnnonceComponent {
   onSubmit(): void {
     // Validation des champs requis
     if (!this.voiture.marque || !this.voiture.modele || !this.voiture.annee || 
-        !this.voiture.prix || !this.voiture.couleur || !this.voiture.etat || 
+        !this.voiture.prix || !this.voiture.couleur || 
         !this.voiture.typeCarburant || !this.voiture.nombrePassagers || 
         !this.voiture.nombreChevaux || !this.voiture.nombrePortes || 
         !this.voiture.dateDebutDisponibilite || !this.voiture.dateFinDisponibilite ||

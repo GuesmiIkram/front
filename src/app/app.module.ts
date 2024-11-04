@@ -13,6 +13,8 @@ import { CreateProprietaireComponent } from './create-proprietaire/create-propri
 import { PublierAnnonceClientComponent } from './publier-annonce-client/publier-annonce-client.component';
 import { ListePubComponent } from './liste-pub/liste-pub.component';
 import { LoginComponent } from './login/login.component';
+import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { LoginClientComponent } from './login-client/login-client.component';
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { LoginComponent } from './login/login.component';
     PublierAnnonceClientComponent,
     ListePubComponent,
     LoginComponent,
+    LoginClientComponent,
    
     
   
@@ -35,10 +38,29 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
+    SocialLoginModule
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        lang: 'en',
+        providers: [
+         
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('851462143702467')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,6 +12,7 @@ export class pubService {
     constructor(private http: HttpClient) {}
 
     createpub(pub: pub): Observable<pub> {
+        
         return this.http.post<pub>(this.apiUrl, pub);
     }
 
