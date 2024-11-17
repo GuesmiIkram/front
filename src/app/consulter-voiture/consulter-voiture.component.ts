@@ -11,6 +11,7 @@ import { VoitureService } from '../services/VoitureService';
 export class ConsulterVoitureComponent implements OnInit {
   voiture?: Voiture; // Define a variable to hold the car details
   message: string = '';
+  voitureImageUrl: string | undefined; 
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +29,8 @@ export class ConsulterVoitureComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id')); // Get the ID from the route
     this.voitureService.getVoitureById(id).subscribe({
       next: (data) => {
-        this.voiture = data; // Assign the car data to the variable
+        this.voiture = data; 
+        this.loadVoitureImage(id); // Assign the car data to the variable
       },
       error: (err) => {
         this.message = 'Une erreur est survenue lors de la récupération des détails de la voiture.';
@@ -36,4 +38,20 @@ export class ConsulterVoitureComponent implements OnInit {
       }
     });
   }
+  loadVoitureImage(id: number): void {
+    this.voitureService.getImageVoitureById(id).subscribe({
+      next: (blob) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.voitureImageUrl = reader.result as string;
+        };
+        reader.readAsDataURL(blob);
+      },
+      error: (err) => {
+        console.error('Error loading car image:', err);
+      }
+    });
+  }
 }
+
+

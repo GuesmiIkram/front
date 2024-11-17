@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteAuto - Location de Voitures Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+    
+    </style>
+
+    
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">EliteAuto</div>
+            <ul class="nav-links">
+                <li><a [routerLink]="['/accueil']">Accueil</a></li>
+                <li><a [routerLink]="['/offres']">Nos Voitures</a></li>
+                <li><a (click)="openModal() ">Publier une annonce</a></li>
+                <li><a (click)="signOut()">signOut</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+  </header>
+  <main>
+
+<table class="hero">
+    <thead>
+      <tr>
+        <th>Marque</th>
+        <th>Modèle</th>
+      
+        <th>nom de proprietaire</th>
+      
+        <th>Date Début réservation </th>
+        <th>Date Fin réservation</th>
+        <th>Montant Total</th>
+        <th>Montant Payé</th>
+       <th> montantCaution</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reservation of reservations">
+        <td>{{ voituresMap[reservation.voitureId]?.marque}}</td>
+        <td>{{ voituresMap[reservation.voitureId]?.modele}}</td>
+        <td>{{ proprietairesMap[reservation.proprietaireId]?.nom || 'N/A' }}</td> 
+        
+        <td>{{ reservation.dateDebut }}</td>
+        <td>{{ reservation.dateFin }}</td>
+        <td>{{ reservation.montantTotal  }}TND</td>
+        <td>{{ reservation.montantPaye  }}TND</td>
+        <td>{{ voituresMap[reservation.voitureId]?.montantCaution}}TND</td>
+       
+        <td>
+          <button *ngIf="reservation.montantPaye < reservation.montantTotal" (click)="paySecondInstallment(reservation)">
+           payer la 2 éme tranche du montant 
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <!-- Message de succès -->
+  <div *ngIf="paymentSuccess" class="success-message">
+    <p>paiement effectuée avec succée</p>
+  </div>
+  
+  <!-- Message d'erreur -->
+  </main>
+  
+  <!-- Formulaire de paiement -->
+  <div *ngIf="showPaymentForm" class="payment-form-modal">
+    <h2>paiement de la 2éme tranche du montant</h2>
+    <p>la 2éme tranche + montant de Caution: {{ secondInstallmentAmount }}TND</p>
+    <form (submit)="submitPayment()">
+      <div id="card-element"></div> <!-- Stripe Card Element mount -->
+      <button type="submit">Pay Now</button>
+    </form>
+  </div>
+  <footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>À propos d'EliteAuto</h3>
+                <p>EliteAuto est votre partenaire de confiance pour la location de voitures de luxe. Nous nous engageons à fournir une expérience de conduite exceptionnelle.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a [routerLink]="['/accueil']">Accueil</a></li>
+                    <li><a [routerLink]="['/offres']">Nos Voitures</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: info@eliteauto.com</p>
+                <p>Téléphone: ******</p>
+                <p>Adresse:*******</p>
+            </div>
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 EliteAuto - Location de Voitures Premium. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

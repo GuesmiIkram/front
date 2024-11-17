@@ -15,6 +15,10 @@ export class ProprietaireService {
 
   createProprietaire(proprietaire: Proprietaire): Observable<{ message?: string; error?: string }> {
     return this.http.post<{ message?: string; error?: string }>('http://localhost:8081/api/proprietaires', proprietaire);
+
+}
+getProprietaireById(id: number): Observable<Proprietaire> {
+  return this.http.get<Proprietaire>(`${this.apiUrl}/${id}`);
 }
 }
 

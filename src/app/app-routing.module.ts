@@ -9,6 +9,12 @@ import { PublierAnnonceClientComponent } from './publier-annonce-client/publier-
 import { ListePubComponent } from './liste-pub/liste-pub.component';
 import { LoginComponent } from './login/login.component';
 import { LoginClientComponent } from './login-client/login-client.component';
+import { ClientReservationsComponent } from './client-reservations/client-reservations.component';
+import { ResponsePageComponent } from './response-page/response-page.component';
+import { ProprietaireReservationsComponent } from './proprietaire-reservations/proprietaire-reservations.component';
+import { ConsulterResponseComponent } from './consulter-response/consulter-response.component';
+import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
+import { DashboardPropComponent } from './dashboard-prop/dashboard-prop.component';
 
 
 
@@ -22,7 +28,12 @@ const routes: Routes = [
   { path: 'liste-pub', component: ListePubComponent },
   { path: 'login', component: LoginComponent },
   { path: 'loginC', component: LoginClientComponent },
-
+  { path: 'reservationC', component: ClientReservationsComponent },
+  { path: 'publication/:id', component: ResponsePageComponent },
+  { path: 'reservations-proprietaire', component: ProprietaireReservationsComponent },
+  { path: 'response/:idClient', component: ConsulterResponseComponent },
+  {path: 'dashboardClient', component: DashboardClientComponent},
+  {path: 'dashboardProp', component:DashboardPropComponent },
 
 ];
 

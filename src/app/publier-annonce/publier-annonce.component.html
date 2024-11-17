@@ -1,4 +1,6 @@
-<<form (ngSubmit)="onSubmit()" #voitureForm="ngForm">
+
+
+<form (ngSubmit)="onSubmit()" #voitureForm="ngForm">
     <div class="container">
         <div class="form-container">
             <h2>Publier une annonce de voiture</h2>
@@ -20,14 +22,14 @@
 
             <!-- Champ Année -->
             <div>
-                <label for="annee">Année</label>
+                <label for="annee">Année de fabrication </label>
                 <input type="number" id="annee" [(ngModel)]="voiture.annee" name="annee" required>
                 <p *ngIf="!voiture.annee && voitureForm.submitted" style="color: red;">Ce champ est requis.</p>
             </div>
 
             <!-- Champ Prix -->
             <div>
-                <label for="prix">Prix</label>
+                <label for="prix">Prix de location par jour </label>
                 <input type="number" id="prix" [(ngModel)]="voiture.prix" name="prix" required>
                 <p *ngIf="!voiture.prix && voitureForm.submitted" style="color: red;">Ce champ est requis.</p>
             </div>
@@ -52,7 +54,7 @@
             <div>
                 <label for="nombrePassagers">Nombre de passagers</label>
                 <select id="nombrePassagers" [(ngModel)]="voiture.nombrePassagers" name="nombrePassagers" required>
-                    <option value="">Sélectionnez</option> <!-- Option vide pour la validation -->
+                    <option value="" disabled selected>Sélectionnez</option>
                     <option value="2">2</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
@@ -64,14 +66,14 @@
             <!-- Champ Nombre de Chevaux -->
             <div>
                 <label for="nombreChevaux">Nombre de chevaux</label>
-                <select id="nombreChevaux" [(ngModel)]="voiture.nombreChevaux" name="nombreChevaux" required>
-                    <option value="">Sélectionnez</option> <!-- Option vide pour la validation -->
-                    <option value="70">70</option>
-                    <option value="100">100</option>
-                    <option value="150">150</option>
-                    <option value="200">200</option>
-                    <option value="250">250</option>
-                    <option value="300">300</option>
+                <select id="nombreChevaux" [(ngModel)]="voiture.nombreChevaux" name="nombreChevaux"  required>
+                    <option value="" disabled selected>Sélectionnez</option>
+                    <option value="70">3</option>
+                    <option value="100">4</option>
+                    <option value="150">5</option>
+                    <option value="200">6</option>
+                    <option value="250">7</option>
+             
                 </select>
                 <p *ngIf="!voiture.nombreChevaux && voitureForm.submitted" style="color: red;">Ce champ est requis.</p>
             </div>
@@ -80,7 +82,7 @@
             <div>
                 <label for="nombrePortes">Nombre de portes</label>
                 <select id="nombrePortes" [(ngModel)]="voiture.nombrePortes" name="nombrePortes" required>
-                    <option value="">Sélectionnez</option> <!-- Option vide pour la validation -->
+                    <option value="" disabled selected>Sélectionnez</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -91,14 +93,21 @@
 
             <!-- Champ Dates -->
             <div>
-                <label for="dateDebut">Date de début :</label>
-                <input type="date" id="dateDebut" [(ngModel)]="voiture.dateDebutDisponibilite" name="dateDebut" required>
-                <p *ngIf="!voiture.dateDebutDisponibilite && voitureForm.submitted" style="color: red;">Ce champ est requis.</p>
-
-                <label for="dateFin">Date de fin :</label>
-                <input type="date" id="dateFin" [(ngModel)]="voiture.dateFinDisponibilite" name="dateFin" required>
-                <p *ngIf="!voiture.dateFinDisponibilite && voitureForm.submitted" style="color: red;">Ce champ est requis.</p>
+                <h3>Disponibilités</h3>
+                <div *ngFor="let disponibilite of voiture.disponibilites; let i = index">
+                    <label>Date de début :</label>
+                    <input type="date" [(ngModel)]="voiture.disponibilites[i].dateDebutDisponibilite" name="dateDebutDisponibilite{{i}}" required>
+                    
+                    <label>Date de fin :</label>
+                    <input type="date" [(ngModel)]="voiture.disponibilites[i].dateFinDisponibilite" name="dateFinDisponibilite{{i}}" required>
+                    
+                    <button type="button" (click)="removeDisponibilite(i)">Supprimer</button>
+                </div>
+                
+                <button type="button" (click)="addDisponibilite()">Ajouter une période</button>
             </div>
+            
+          
 
             <!-- Champ Montant de la Caution -->
             <div>

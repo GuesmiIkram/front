@@ -15,6 +15,14 @@ import { ListePubComponent } from './liste-pub/liste-pub.component';
 import { LoginComponent } from './login/login.component';
 import { FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { LoginClientComponent } from './login-client/login-client.component';
+import { ClientReservationsComponent } from './client-reservations/client-reservations.component';
+import { ResponsePageComponent } from './response-page/response-page.component';
+import { ProprietaireReservationsComponent } from './proprietaire-reservations/proprietaire-reservations.component';
+import { ConsulterResponseComponent } from './consulter-response/consulter-response.component';
+import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
+import { DashboardPropComponent } from './dashboard-prop/dashboard-prop.component';
+
+
 
 
 @NgModule({
@@ -29,6 +37,14 @@ import { LoginClientComponent } from './login-client/login-client.component';
     ListePubComponent,
     LoginComponent,
     LoginClientComponent,
+    ClientReservationsComponent,
+    ResponsePageComponent,
+    ProprietaireReservationsComponent,
+    ConsulterResponseComponent,
+    DashboardClientComponent,
+    DashboardPropComponent,
+   
+ 
    
     
   

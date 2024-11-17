@@ -1,7 +1,5 @@
 export class pub {
-    id_pub?: number; 
+    idPub?: number; 
     idClient!: number;
     contenu!: string; 
 }
-
-

@@ -1,0 +1,83 @@
+<body>
+    <header>
+      <nav class="container">
+        <div class="logo">EliteAuto</div>
+        <ul class="nav-links">
+          <li><a [routerLink]="['/accueil']">Accueil</a></li>
+          <li><a [routerLink]="['/offres']">Nos Voitures</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+    <main class="publications-section">
+      <div *ngIf="groupedResponses.length > 0; else noResponses">
+        <div *ngFor="let group of groupedResponses; let i = index" class="publication-card">
+          <div class="publication-header">
+            <p><strong>Votre publication :</strong> {{ group.publicationContenu }}</p>
+            <button (click)="togglePublicationResponses(i)">
+              {{ selectedPublicationIndex === i ? 'Masquer les réponses' : 'Voir les réponses' }}
+            </button>
+          </div>
+  
+          <!-- Affichage des réponses sous la publication -->
+          <div *ngIf="selectedPublicationIndex === i" class="responses-section">
+            <div *ngFor="let response of group.responses" class="response-card">
+              <div *ngIf="response.responsecontenu && response.responsecontenu.trim() !== ''">
+                <div class="owner-profile">
+                  <h3>{{ response.nom_prop }}</h3>
+                  <p>{{ response.tel_prop }}</p>
+                  <p>{{ response.responsecontenu }}</p>
+                  <button class="email-button" (click)="openEmail(response.email_prop)">
+                    <img src="assets/img.png" alt="Gmail" class="email-icon">
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <ng-template #noResponses>
+        <p>{{ message || 'Aucune réponse trouvée pour ce client.' }}</p>
+      </ng-template>
+    </main>
+  
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>À propos d'EliteAuto</h3>
+            <p>EliteAuto est votre partenaire de confiance pour la location de voitures de luxe. Nous nous engageons à fournir une expérience de conduite exceptionnelle.</p>
+          </div>
+          <div class="footer-section">
+            <h3>Liens Rapides</h3>
+            <ul>
+              <li><a [routerLink]="['/accueil']">Accueil</a></li>
+              <li><a [routerLink]="['/offres']">Nos Voitures</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Contact</h3>
+            <p>Email: info@eliteauto.com</p>
+            <p>Téléphone: ******</p>
+            <p>Adresse:*******</p>
+          </div>
+          <div class="footer-section">
+            <h3>Suivez-nous</h3>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>&copy; 2023 EliteAuto - Location de Voitures Premium. Tous droits réservés.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+  

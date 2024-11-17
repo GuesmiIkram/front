@@ -21,27 +21,25 @@
     <div class="container car-details-section">
         <div *ngIf="voiture" class="car-details">
           <a [routerLink]="['/offres']"> Retour</a>
-            <img [src]="'http://localhost:8081/images/' + voiture.imagePath" 
-                 [alt]="voiture.marque + ' ' + voiture.modele" 
-                 class="car-image">
+          <img *ngIf="voitureImageUrl" [src]="voitureImageUrl" 
+          [alt]="voiture.marque + ' ' + voiture.modele" 
+          class="car-image">
             <div class="car-info">
                 <h1>Voiture : {{ voiture.marque }} {{ voiture.modele }}</h1>
                 <div class="car-pricing">
-                    <div class="price">{{ voiture.prixParJour }} €/jour</div>
+                    <div class="price">{{ voiture.prix }} TND/jour</div>
                     <button class="btn-reserver">Réserver</button>
                 </div>
                 <div class="car-features">
                     <div><i class="fas fa-car"></i><p>{{ voiture.nombrePortes }} portes</p></div>
-                    <div><i class="fas fa-snowflake"></i><p>Climatisation : {{ voiture.airConditionne }}</p></div>
-                    <div><i class="fas fa-cogs"></i><p>Boîte : {{ voiture.boiteVitesse }}</p></div>
+                    <div><i class="fas fa-snowflake"></i><p>Année de fabrication : {{ voiture.annee }}</p></div>
+                   
                     <div><i class="fas fa-gas-pump"></i><p>Carburant : {{ voiture.typeCarburant }}</p></div>
                     <div><i class="fas fa-palette"></i><p>Couleur : {{ voiture.couleur }}</p></div>
-                    <div><i class="fas fa-euro-sign"></i><p>Caution : {{ voiture.montantCaution }} €</p></div>
-                    <div><i class="fas fa-info-circle"></i><p>Description : {{ voiture.description }}</p></div>
+                    <div><i class="fas fa-euro-sign"></i><p>Caution : {{ voiture.montantCaution }} TND</p></div>
+                    <div><i class="fas fa-info-circle"></i><p>nombrePassagers: {{ voiture.nombrePassagers }}</p></div>
                 </div>
-                <div class="availability">
-                    <h2>Disponible du {{ voiture.dateDebutDisponibilite | date:'dd/MM/yyyy' }} au {{ voiture.dateFinDisponibilite | date:'dd/MM/yyyy' }}</h2>
-                </div>
+            
             </div>
             <p *ngIf="message" class="message">{{ message }}</p>
         </div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { VoitureService } from '../services/VoitureService';
 import { Voiture } from '../models/Voiture';
+import { Disponibilite } from '../models/Disponibilite';
 
 @Component({
   selector: 'app-publier-annonce',
@@ -18,17 +19,29 @@ export class PublierAnnonceComponent {
   onImageChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      this.imageFile = file;  // Enregistrer l'image
+      this.imageFile = file;
+      this.voiture.imagePath = file.name; 
+      console.log(file);  // Enregistrer l'image
     }
   }
-  
 
-  validateDates(): boolean {
-    const dateDebut = new Date(this.voiture.dateDebutDisponibilite);
-    const dateFin = new Date(this.voiture.dateFinDisponibilite);
-    if (dateDebut > dateFin) {
-      this.warningMessage = "La date de début ne peut pas être supérieure à la date de fin.";
-      return false;
+  
+  addDisponibilite(): void {
+    this.voiture.disponibilites.push(new Disponibilite());
+  }
+
+  removeDisponibilite(index: number): void {
+    this.voiture.disponibilites.splice(index, 1);
+  }
+
+  validateDisponibilites(): boolean {
+    for (const disponibilite of this.voiture.disponibilites) {
+      const dateDebut = new Date(disponibilite.dateDebutDisponibilite);
+      const dateFin = new Date(disponibilite.dateFinDisponibilite);
+      if (dateDebut > dateFin) {
+        this.warningMessage = "La date de début ne peut pas être supérieure à la date de fin dans les disponibilités.";
+        return false;
+      }
     }
     this.warningMessage = null; // Aucune erreur
     return true;
@@ -40,11 +53,11 @@ export class PublierAnnonceComponent {
         !this.voiture.prix || !this.voiture.couleur || 
         !this.voiture.typeCarburant || !this.voiture.nombrePassagers || 
         !this.voiture.nombreChevaux || !this.voiture.nombrePortes || 
-        !this.voiture.dateDebutDisponibilite || !this.voiture.dateFinDisponibilite ||
-        !this.voiture.montantCaution) {
+        !this.voiture.montantCaution || this.voiture.disponibilites.length === 0) {
       this.message = "Tous les champs doivent être remplis.";
       return;
     }
+
     const userId = localStorage.getItem('userId');
     if (!userId) {
         this.message = "Utilisateur non connecté.";
@@ -53,20 +66,29 @@ export class PublierAnnonceComponent {
 
     this.voiture.proprietaireId = Number(userId);
 
-    if (this.validateDates()) {
+    if (this.validateDisponibilites()) {
       console.log('Données de la voiture :', this.voiture);
-      this.voitureService.createVoiture(this.voiture, this.imageFile).subscribe({
-        next: (response) => {
-          this.message = 'Voiture publiée avec succès !';
-          console.log(response);
+      this.voitureService.createVoiture(this.voiture).subscribe(
+        (data)=>{
+          alert(data);
+          const fd : FormData = new FormData();
+          fd.append("imageFile",this.imageFile);
+          this.voitureService.enregistrerImageVoiture(fd,data).subscribe(
+            (data)=>{
+              alert(data);
+            },
+            (error)=>{
+              console.log(error.error)
+            }
+          )
         },
-        error: (err) => {
+        (error) => {
           this.message = 'Une erreur est survenue lors de la publication.';
-          console.error(err);
+          console.error(error);
         }
-      });
+      );
     } else {
-      this.message = "";  // Réinitialiser le message si les dates ne sont pas valides
+      this.message = "";  // Réinitialiser le message si les disponibilités ne sont pas valides
     }
   }
 }

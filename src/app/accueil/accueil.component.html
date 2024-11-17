@@ -18,7 +18,7 @@
             <ul class="nav-links">
                 <li><a [routerLink]="['/accueil']">Accueil</a></li>
                 <li><a [routerLink]="['/offres']">Nos Voitures</a></li>
-                <li><a (click)="openModal() ">Publier une annonce</a></li>
+                <li><a (click)="openModal() ">se connecter</a></li>
                 <li><a (click)="signOut()">signOut</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -27,11 +27,13 @@
     <div class="modal" [ngClass]="{'show': modalVisible}" id="myModal">
         <div class="modal-content">
           <span class="close" (click)="closeModal()">&times;</span>
-          <h2>Alerte</h2>
-          <p>Choisissez votre type de connexion :</p>
+          <h2>Choisissez votre type de connexion :</h2>
+          
           <div class="login-options">
               <a [routerLink]="['/login']" class="btn">Connexion Propriétaire</a>
-              <a [routerLink]="['/loginC']" class="btn">Connexion Client</a>
+              <!--<a [routerLink]="['/loginC']" class="btn">Connexion Client</a>-->
+              <button (click)="signInWithFB()" [disabled]="isLoading" class="btn">Connexion Client</button>
+              
           </div>
         </div>
       </div>

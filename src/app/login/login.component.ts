@@ -25,7 +25,7 @@ export class LoginComponent {
       next: (response: any) => {
         console.log('Login successful:', response);
         localStorage.setItem('userId', response.proprietaireId);
-        this.router.navigate(['/publier-annonce']);
+        this.router.navigate(['/dashboardProp']);
       },
       error: error => {
         console.error('Login failed:', error);

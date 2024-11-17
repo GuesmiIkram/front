@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<div class="dashboard-container">
+    <!-- Barre latérale -->
+    <nav class="sidebar">
+      <div class="sidebar-header">
+      
+        <h2>EliteAuto</h2>
+      </div>
+      <ul>
+        <li>
+          <a [routerLink]="['/publier-annonce-client']" routerLinkActive="active">
+            <i class="fas fa-car"></i> Publier une annonce
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/response',clientId]" routerLinkActive="active">
+            <i class="fas fa-comments"></i> Consulter les réponses
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/offres']" routerLinkActive="active">
+            <i class="fas fa-tags"></i> Consulter les offres
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/reservationC']" routerLinkActive="active">
+            <i class="fas fa-calendar-alt"></i> Mes réservations
+          </a>
+
+        </li>
+        <li>
+            <a [routerLink]="['/accueil']" routerLinkActive="active">
+              <i class="fas fa-calendar-alt"></i> Déconnexion
+            </a>
+            
+          </li>
+      </ul>
+    </nav>
+  
+    
+    <div class="main-content">
+      <header class="dashboard-header">
+        <h1 class="dashboard-title">Tableau de bord</h1>
+        <div class="user-info">
+          <span>Bienvenue,{{ clientName }} </span>
+      
+        </div>
+      </header>
+  <!-- Contenu principal 
+      <div class="dashboard-stats">
+        <div class="info-card">
+          <h2><i class="fas fa-chart-line"></i> Statistiques rapides</h2>
+          <p>Annonces actives: {{activeListings}}</p>
+          <p>Réservations en cours: {{currentReservations}}</p>
+        </div>
+      </div>
+  -->
+      <router-outlet></router-outlet>
+    </div>
+  </div>

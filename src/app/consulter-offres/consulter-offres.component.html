@@ -1,92 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EliteAuto - Nos Voitures</title>
+</head>
 <body>
   <header>
-      <nav class="containerr">
-          <div class="logo">EliteAuto</div>
-          <ul class="nav-links">
+    <nav class="containerr">
+      <div class="logo">EliteAuto</div>
+      <ul class="nav-links">
+        <li><a [routerLink]="['/accueil']">Accueil</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Offres Disponibles</h2>
+
+    <div class="date-filter">
+      <label for="filterDateDebut">Date de début:</label>
+      <input type="date" id="filterDateDebut" [(ngModel)]="filterDateDebut">
+
+      <label for="filterDateFin">Date de fin:</label>
+      <input type="date" id="filterDateFin" [(ngModel)]="filterDateFin">
+
+      <button type="button" (click)="filtrerVoitures()">Filtrer</button>
+    </div>
+
+    <div *ngIf="filteredVoitures.length === 0">
+      <p>Aucune voiture disponible pour le moment.</p>
+    </div>
+
+    <div *ngIf="filteredVoitures.length > 0" class="car-grid">
+      <div *ngFor="let voiture of filteredVoitures" class="car-card">
+        <div *ngIf="voiture && voiture.imagePath">
+          <img 
+          [src]="carImages[voiture.id!]" 
+          alt="Image de {{ voiture.marque }} {{ voiture.modele }}" 
+          class="voiture-image"
+        />
+        </div>
+        <div class="car-info">
+          <h3>{{ voiture.marque }} {{ voiture.modele }}</h3>
+          <p>Année : {{ voiture.annee }}</p>
+          <p class="price">Prix par jour : {{ voiture.prix }} TND</p>
+          <p>Description : {{ voiture.description }}</p>
+
+          <div *ngIf="voiture.disponibilites.length > 0">
+            <h4>Disponibilités :</h4>
+            <ul>
+              <li *ngFor="let dispo of voiture.disponibilites">
+                Du {{ dispo.dateDebutDisponibilite }} au {{ dispo.dateFinDisponibilite }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="btn-container">
+            <button type="button" (click)="openReservationForm(voiture)" class="btn btn-consult" >Réserver</button>
+            <a [routerLink]="['/voiture', voiture.id]" class="btn btn-consult">Consulter</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div *ngIf="showReservationForm" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Réservation de la voiture</h3>
+      <div>
+        <label>Date de début :</label>
+        <input [(ngModel)]="reservationDateDebut" type="date">
+      </div>
+      <div>
+        <label>Date de fin :</label>
+        <input [(ngModel)]="reservationDateFin" type="date">
+      </div>
+      <form (ngSubmit)="submitReservation()">
+        <div id="payment-form">
+          <div id="card-element">
+            <!-- Le formulaire Stripe pour les informations de carte sera monté ici -->
+          </div>
+          <button type="submit">Payer et Réserver</button>
+        </div>
+        <p *ngIf="message" class="message">{{ message }}</p>
+      </form>
+      <div *ngIf="message">{{ message }}</div>
+      <button (click)="closeReservationForm()">Fermer</button>
+   
+    </div>
+  </div>
+
+  
+
+  <footer>
+    <div class="containerr">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>À propos d'EliteAuto</h3>
+          <p>EliteAuto est votre partenaire de confiance pour la location de voitures de luxe. Nous nous engageons à fournir une expérience de conduite exceptionnelle.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Liens Rapides</h3>
+          <ul>
             <li><a [routerLink]="['/accueil']">Accueil</a></li>
             <li><a [routerLink]="['/offres']">Nos Voitures</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-      </nav>
-  </header>
-
-<div class="container">
-  
-
-<h2>Offres Disponibles</h2>
-<div class="filter-container">
-  <label for="dateDebut">Date de début :</label>
-  <input type="date" id="dateDebut" [(ngModel)]="filterDateDebut" name="dateDebut">
-
-  <label for="dateFin">Date de fin :</label>
-  <input type="date" id="dateFin" [(ngModel)]="filterDateFin" name="dateFin">
-
-  <button (click)="filtrerVoitures()">Filtrer</button>
-</div>
-
-<div *ngIf="voitures.length === 0">
-  <p>Aucune voiture disponible pour le moment.</p>
-</div>
-
-<div *ngIf="voitures.length > 0" class="car-grid">
-  <div *ngFor="let voiture of voitures" class="car-card">
-    <div *ngIf="voiture && voiture.imagePath">
-      <img [src]="'http://localhost:8081/images/' + voiture.imagePath" 
-           alt="{{ voiture.marque || '' }} {{ voiture.modele || '' }}" 
-           width="100%" 
-           height="200" 
-           style="object-fit: cover;">
-    </div>
-    <div class="car-info">
-      <h3>{{ voiture.marque }} {{ voiture.modele }}</h3>
-      <p>Année : {{ voiture.annee }}</p>
-      <p class="price">Prix par jour : {{ voiture.prix }} TND</p>
-      <p>Description : {{ voiture.description }}</p>
-      <div class="btn-container">
-        <a href="#" class="btn">Réserver</a>
-        <a [routerLink]="['/voiture', voiture.id]" class="btn btn-consult">Consulter</a>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<p *ngIf="message" class="message">{{ message }}</p>
-
-<footer>
-  <div class="containerr">
-      <div class="footer-content">
-          <div class="footer-section">
-              <h3>À propos d'EliteAuto</h3>
-              <p>EliteAuto est votre partenaire de confiance pour la location de voitures de luxe. Nous nous engageons à fournir une expérience de conduite exceptionnelle.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>Email: info@eliteauto.com</p>
+          <p>Téléphone: ******</p>
+          <p>Adresse: *******</p>
+        </div>
+        <div class="footer-section">
+          <h3>Suivez-nous</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
           </div>
-          <div class="footer-section">
-              <h3>Liens Rapides</h3>
-              <ul>
-                <li><a [routerLink]="['/accueil']">Accueil</a></li>
-                <li><a [routerLink]="['/offres']">Nos Voitures</a></li>
-                <li><a href="#contact">Contact</a></li>
-              </ul>
-          </div>
-          <div class="footer-section">
-              <h3>Contact</h3>
-              <p>Email: info@eliteauto.com</p>
-              <p>Téléphone: ******</p>
-              <p>Adresse:*******</p>
-          </div>
-          <div class="footer-section">
-              <h3>Suivez-nous</h3>
-              <div class="social-icons">
-                  <a href="#"><i class="fab fa-facebook"></i></a>
-                  <a href="#"><i class="fab fa-twitter"></i></a>
-                  <a href="#"><i class="fab fa-instagram"></i></a>
-                  <a href="#"><i class="fab fa-linkedin"></i></a>
-              </div>
-          </div>
+        </div>
       </div>
       <div class="copyright">
-          <p>&copy; 2023 EliteAuto - Location de Voitures Premium. Tous droits réservés.</p>
+        <p>&copy; 2023 EliteAuto - Location de Voitures Premium. Tous droits réservés.</p>
       </div>
-  </div>
-</footer>
+    </div>
+  </footer>
 </body>
+</html>

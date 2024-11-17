@@ -29,7 +29,7 @@ export class LoginClientComponent {
             next: (response: any) => {
               localStorage.setItem('userId', response.id.toString());
               console.log('Client logged in or registered:', response);
-              this.router.navigate(['/publier-annonce-client']);
+              this.router.navigate(['/dashboardClient']);
             },
             error: error => {
               console.error('Login/Registration failed:', error);
