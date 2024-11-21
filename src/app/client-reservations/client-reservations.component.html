@@ -58,6 +58,9 @@
           <button *ngIf="reservation.montantPaye < reservation.montantTotal" (click)="paySecondInstallment(reservation)">
            payer la 2 éme tranche du montant 
           </button>
+          <button (click)="openAvisModal(reservation)">Ajouter un avis</button>
+          <button (click)="fetchAvisForProprietaire(reservation.proprietaireId)">Consulter les avis</button>
+            
         </td>
       </tr>
     </tbody>
@@ -68,6 +71,36 @@
     <p>paiement effectuée avec succée</p>
   </div>
   
+  <div *ngIf="avisModalVisible" class="modal">
+    <h3>Ajouter un Avis</h3>
+    <form (ngSubmit)="submitAvis()">
+      <textarea [(ngModel)]="avisContenu" placeholder="Votre avis" name="contenu" required></textarea>
+      <label for="note">Note :</label>
+      <select [(ngModel)]="avisNote" name="note" required (change)="onNoteChange($event)">
+        <option [value]="1">1</option>
+        <option [value]="2">2</option>
+        <option [value]="3">3</option>
+        <option [value]="4">4</option>
+        <option [value]="5">5</option>
+      </select>
+      <button type="submit">Soumettre</button>
+      <button type="button" (click)="closeAvisModal()">Annuler</button>
+    </form>
+  </div>
+  
+  <div *ngIf="avisModalVisibles" class="modal">
+    <h3>Avis pour le Propriétaire</h3>
+    <ul *ngIf="selectedProprietaireId !== null && avisProprietaires[selectedProprietaireId]?.length; else noAvis">
+      <li *ngFor="let avis of avisProprietaires[selectedProprietaireId || 0]">
+        <p>Note : {{avis.note }}/5</p>
+        <p>{{ avis.contenu }}</p>
+      </li>
+    </ul>
+    <ng-template #noAvis>
+      <p>Aucun avis pour ce propriétaire.</p>
+    </ng-template>
+    <button (click)="closeAvisModals()">Fermer</button>
+  </div>
   <!-- Message d'erreur -->
   </main>
   

@@ -28,16 +28,20 @@
                 <thead>
                     <tr>
                         <th>Marque</th>
+                        <th>id reservation</th>
                         <th>Modèle</th>
                         <th>État</th>
                         <th>Date Début réservation</th>
                         <th>Date Fin réservation</th>
                         <th>Montant Total</th>
                         <th>Montant de caution</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let reservation of reservations">
+                        <td>{{ reservation.dateDebut }}</td>
+
                         <td>{{ voitures[reservation.voitureId]?.marque || 'N/A' }}</td>
                         <td>{{ voitures[reservation.voitureId]?.modele || 'N/A' }}</td>
                         <td [ngClass]="{'etat-rouge': voitures[reservation.voitureId]?.etat}">
@@ -47,10 +51,54 @@
                         <td>{{ reservation.dateFin }}</td>
                         <td>{{ reservation.montantTotal }} TND</td>
                         <td>{{ voitures[reservation.voitureId]?.montantCaution || 'N/A' }}TND</td>
+                        <td>
+                            <button (click)="openAvisModal(reservation)">Ajouter un avis</button>
+                            <button *ngIf="reservation.clientId" (click)="fetchAvisForClient(reservation.clientId)">
+                                Consulter les avis
+                              </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <div *ngIf="avisModalVisible" class="modal">
+            <div class="modal-content">
+                <h3>Ajouter un Avis</h3>
+                <form (ngSubmit)="submitAvis()">
+                    <textarea [(ngModel)]="avisContenu" name="contenu" placeholder="Écrivez votre avis ici..." required></textarea>
+
+                    <label for="note">Note :</label>
+                    <select [(ngModel)]="avisNote" name="note" required (change)="onNoteChange($event)">
+                        <option [value]="1">1</option>
+                        <option [value]="2">2</option>
+                        <option [value]="3">3</option>
+                        <option [value]="4">4</option>
+                        <option [value]="5">5</option>
+                      </select>
+                    <button type="submit">Soumettre</button>
+                    <button type="button" (click)="closeAvisModal()">Annuler</button>
+                </form>
+            </div>
+        </div>
+        <div *ngIf="avisModalVisibles" class="modal">
+            <div class="modal-content">
+              <h3>Avis du Client</h3>
+            <ul *ngIf="selectedClientId !== null && avisClients[selectedClientId] && avisClients[selectedClientId].length > 0; else noAvis">
+
+                <li *ngFor="let avis of avisClients[selectedClientId]">
+                  <p><strong>Note :</strong> {{ avis.note }}/5</p>
+                  <p><strong>Contenu :</strong> {{ avis.contenu }}</p>
+                  <p><strong>Date :</strong> {{ avis.dateAvis | date: 'short' }}</p>
+                </li>
+              </ul>
+              <ng-template #noAvis>
+                <p>Aucun avis pour ce client.</p>
+              </ng-template>
+              <button (click)="closeAvisModals()">Fermer</button>
+            </div>
+          </div>
+          
+        
         <ng-template #noReservations>
             <p>Aucune réservation trouvée pour ce propriétaire.</p>
         </ng-template>

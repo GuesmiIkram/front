@@ -169,6 +169,7 @@ export class ConsulterOffresComponent implements OnInit {
     const montantPaye = montantTotal / 3;
 
     const reservation = new Reservation(
+      0,
       this.selectedVoiture.id || 0,
       this.selectedVoiture.proprietaireId || 0,
       parseInt(localStorage.getItem('userId') || '0', 10),

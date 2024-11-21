@@ -22,5 +22,5 @@ export class ReservationService {
     return this.http.get<Reservation[]>(`${this.apiUrl}/proprietaire/${proprietaireId}`);
   }
   
-
+ 
 }

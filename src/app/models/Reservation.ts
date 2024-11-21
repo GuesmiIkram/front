@@ -1,5 +1,6 @@
 export class Reservation {
     constructor(
+        public id: number, 
         public voitureId: number,
         public proprietaireId: number,
         public clientId: number,

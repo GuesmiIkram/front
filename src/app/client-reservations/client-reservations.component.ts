@@ -8,6 +8,7 @@ import { VoitureService } from '../services/VoitureService';
 import { ProprietaireService } from '../services/ProprietaireService';
 import { Proprietaire } from '../models/Proprietaire';
 import { Router } from '@angular/router';
+import { AvisProprietaireService } from '../services/AvisProprietaireService';
 
 @Component({
   selector: 'app-client-reservations',
@@ -28,12 +29,19 @@ export class ClientReservationsComponent implements OnInit {
   voituresMap: { [key: number]: Voiture } = {};
   proprietairesMap: { [key: number]: Proprietaire } = {};
   paymentMessage: string = '';
-
+  avisModalVisible: boolean = false;
+  avisModalVisibles: boolean = false;
+  avisContenu: string = '';
+  avisNote: number = 5; 
+  currentReservation: Reservation | null = null;
+  avisProprietaires: { [key: number]: any[] } = {};
+  selectedProprietaireId: number | null = null;
   constructor(
     private reservationService: ReservationService,
     private paymentService: PaymentService,
     private voitureService: VoitureService, 
     private proprietaireService: ProprietaireService,
+    private avisProprietaireService: AvisProprietaireService,
     private router: Router
   ) {}
 
@@ -160,8 +168,8 @@ export class ClientReservationsComponent implements OnInit {
         );
         
         this.paymentMessage = 'Paiement effectué avec succès !';
-        this.router.navigate(['/accueil']);
-            
+     
+         this.router.navigate(['/accueil']);      
        
       }
     } catch (err) {
@@ -193,4 +201,61 @@ export class ClientReservationsComponent implements OnInit {
   closeModal() {
     this.modalVisible = false;
   }
+
+  openAvisModal(reservation: Reservation): void {
+    this.currentReservation = reservation;
+    this.avisModalVisible = true;
+}
+closeAvisModal(): void {
+  this.avisModalVisible = false;
+  this.avisContenu = '';
+  
+  this.currentReservation = null;
+}
+submitAvis(): void {
+
+  console.log("Contenu de l'avis avant envoi:", this.avisContenu);
+  if (this.currentReservation) {
+    const avis = {
+      contenu: this.avisContenu.trim(),
+      note: this.avisNote,
+      client: { id: this.currentReservation.clientId },
+      proprietaire: { id: this.currentReservation.proprietaireId },
+      reservation: { id: this.currentReservation.id }
+    };
+    console.log("Note sélectionnée :", this.avisNote);
+    console.log('Avis envoyé :', avis); 
+
+    this.avisProprietaireService.ajouterAvisProprietaire(avis).subscribe(
+      (response) => {
+        console.log('Avis ajouté avec succès:', response);
+        this.closeAvisModal();
+      },
+      (error) => {
+        console.error('Erreur lors de l\'ajout de l\'avis:', error);
+      }
+    );
+  }
+}
+fetchAvisForProprietaire(proprietaireId: number): void {
+  this.selectedProprietaireId = proprietaireId;
+  this.avisProprietaireService.getAvisByProprietaireId(proprietaireId).subscribe(
+    (avisList) => {
+      this.avisProprietaires[proprietaireId] = avisList;
+      this.avisModalVisibles = true;
+    },
+    (error) => {
+      console.error('Erreur lors de la récupération des avis:', error);
+    }
+  );
+}
+closeAvisModals(): void {
+  this.avisModalVisibles = false;
+  this.selectedProprietaireId = null;
+}
+onNoteChange(event: any): void {
+  console.log('Nouvelle note sélectionnée :', event.target.value);
+  this.avisNote = +event.target.value; // Assurez-vous que c'est un nombre
+}
+
 }
