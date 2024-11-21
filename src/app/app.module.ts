@@ -21,6 +21,7 @@ import { ProprietaireReservationsComponent } from './proprietaire-reservations/p
 import { ConsulterResponseComponent } from './consulter-response/consulter-response.component';
 import { DashboardClientComponent } from './dashboard-client/dashboard-client.component';
 import { DashboardPropComponent } from './dashboard-prop/dashboard-prop.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 
 
@@ -44,6 +45,7 @@ import { DashboardPropComponent } from './dashboard-prop/dashboard-prop.componen
     DashboardClientComponent,
     DashboardPropComponent,
    
+   
  
    
     
@@ -55,7 +57,9 @@ import { DashboardPropComponent } from './dashboard-prop/dashboard-prop.componen
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    GoogleChartsModule
+   
 
   ],
   providers: [

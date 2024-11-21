@@ -1,67 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
 <div class="dashboard-container">
-    <!-- Barre latérale -->
-    <nav class="sidebar">
-      <div class="sidebar-header">
-      
-        <h2>EliteAuto</h2>
-      </div>
-      <ul>
-        <li>
-          <a [routerLink]="['/publier-annonce']" routerLinkActive="active">
-            <i class="fas fa-car"></i> Publier une annonce
-          </a>
-        </li>
-       
-        <li>
-          <a [routerLink]="['/liste-pub']" routerLinkActive="active">
-            <i class="fas fa-tags"></i> Consulter les publications des clients
-          </a>
-        </li>
-        <li>
-          <a [routerLink]="['/reservations-proprietaire']" routerLinkActive="active">
-            <i class="fas fa-calendar-alt"></i> Consulter les réservations de mes voiture
-          </a>
-
-        </li>
-        <li>
-            <a [routerLink]="['/accueil']" routerLinkActive="active">
-              <i class="fas fa-calendar-alt"></i> Déconnexion
-            </a>
-            
-          </li>
-      </ul>
-    </nav>
-  
-    
-    <div class="main-content">
-      <header class="dashboard-header">
-        <h1 class="dashboard-title">Tableau de bord</h1>
-        <div class="user-info">
-          <span>Bienvenue,{{ propName }} </span>
-      
-        </div>
-      </header>
-  <!-- Contenu principal 
-      <div class="dashboard-stats">
-        <div class="info-card">
-          <h2><i class="fas fa-chart-line"></i> Statistiques rapides</h2>
-          <p>Annonces actives: {{activeListings}}</p>
-          <p>Réservations en cours: {{currentReservations}}</p>
-        </div>
-      </div>
-  -->
-      <router-outlet></router-outlet>
+  <!-- Barre latérale -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <h2>EliteAuto</h2>
     </div>
+    <ul>
+      <li>
+        <a [routerLink]="['/publier-annonce']" routerLinkActive="active">
+          <i class="fas fa-car"></i> Publier une annonce
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/liste-pub']" routerLinkActive="active">
+          <i class="fas fa-tags"></i> Consulter les publications des clients
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/reservations-proprietaire']" routerLinkActive="active">
+          <i class="fas fa-calendar-alt"></i> Consulter les réservations de mes voitures
+        </a>
+      </li>
+      <li>
+        <a [routerLink]="['/accueil']" routerLinkActive="active">
+          <i class="fas fa-sign-out-alt"></i> Déconnexion
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="dashboard-content">
+    <header class="dashboard-header">
+      <h1 class="dashboard-title">Tableau de bord</h1>
+      <div class="user-info">
+        <span>Bienvenue, {{ propName }}</span>
+      </div>
+    </header>
+
+    <div class="dashboard-stats">
+      <!-- Réservations par mois -->
+      <div class="info-card">
+        <h2><i class="fas fa-chart-line"></i> Réservations par mois</h2>
+        <google-chart
+          [type]="barChartType"
+          [data]="barChartData"
+          [options]="barChartOptions"
+          [width]="1000"
+          [height]="400">
+        </google-chart>
+      </div>
+    
+      <!-- Paiements -->
+      <div class="info-card">
+        <h2><i class="fas fa-pie-chart"></i> Paiements</h2>
+        <google-chart
+          [type]="doughnutChartType"
+          [data]="doughnutChartData"
+          [options]="doughnutChartOptions"
+          [width]="1000"
+          [height]="400">
+        </google-chart>
+      </div>
+    </div>
+    
+    
   </div>
+</div>
